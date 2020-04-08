@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Testing on Travis-CI &mdash; CPUfactory 3.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Test Driven Development" href="02-test-driven-development.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CPUfactory
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="02-test-driven-development.html">Test Driven Development</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing on Travis-CI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#separation-of-concerns">Separation of Concerns</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CPUfactory</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Testing on Travis-CI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduction/03-testing-on-travis-ci.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="testing-on-travis-ci">
+<h1>Testing on Travis-CI<a class="headerlink" href="#testing-on-travis-ci" title="Permalink to this headline">¶</a></h1>
+<p>We will be using <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development</a> for this project. I use <a class="reference external" href="https://travis-ci.org/">Travis-CI</a>
+for this purpose, and this note covers the testing approach we will need to
+use.</p>
+<p>One of the goals of this project is to compare solutions using three different
+languages. Testing the entire project in one shot is not going to work since
+<a class="reference external" href="https://travis-ci.org/">Travis-CI</a> only supports setting up a test environment in one language at a
+time. The solution to this problem is fairly simple, and probably a good idea
+anyway. We can establish a simple solver <a href="#id1"><span class="problematic" id="id2">|API|</span></a> so additional solvers can be
+added later.</p>
+<div class="section" id="separation-of-concerns">
+<h2>Separation of Concerns<a class="headerlink" href="#separation-of-concerns" title="Permalink to this headline">¶</a></h2>
+<p>Any software project should be designed so major components as as isolated from
+each other as possible. For our <a href="#id3"><span class="problematic" id="id4">CFD_</span></a> experiments, that means we build a GUI
+interface as a separate subproject, then build <a href="#id5"><span class="problematic" id="id6">CFD_</span></a> solvers for each major
+language. By making the solvers separate tools, we can even install them on
+separate machines, and use a messaging protocol so the <a href="#id7"><span class="problematic" id="id8">GUI_</span></a> can fetch results
+as needed for display. Each solver module then can be tested independently.</p>
+<p>A simple solution seems to be to split the project into separate component
+repositories, then merge them into a single package for distribution. For the
+present setup that means we will work on these components:</p>
+<blockquote>
+<div><ul>
+<li><p>CFDexperiments-GUI: Python and PyQt5</p></li>
+<li><p>Solvers</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CFDexperiments-Python</p></li>
+<li><p>CFDexperiments-Cpp</p></li>
+<li><p>CFDexperiments-Go</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>The top-level project will host all project documentation, and provide
+installation tools to set up a test environment. At some point the GUI module
+will support a web-based interface so the experiments can be performed in a
+classroom or at home. This feature will be set up at <a class="reference external" href="https://cfd.pylit.org">https://cfd.pylit.org</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="02-test-driven-development.html" class="btn btn-neutral float-left" title="Test Driven Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Roie R. Black
+      <span class="lastupdated">
+        Last updated on Apr 08, 2020.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

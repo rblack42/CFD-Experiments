@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Test Driven Development &mdash; CPUfactory 3.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing on Travis-CI" href="03-testing-on-travis-ci.html" />
+    <link rel="prev" title="CFD Experiments" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CPUfactory
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Test Driven Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#qtest">QTest</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-testing-on-travis-ci.html">Testing on Travis-CI</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CPUfactory</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Test Driven Development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduction/02-test-driven-development.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="test-driven-development">
+<h1>Test Driven Development<a class="headerlink" href="#test-driven-development" title="Permalink to this headline">¶</a></h1>
+<p>Read time: 2.3 minutes (230 words)</p>
+<p>Writing code is simple. Well, it should be. But making sure your code does the
+right thing is much harder. In today’s development world, testing is the most
+important way we verify that our code does what we want. So, in this set of
+experiments, I will use <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development</a> in writing the code. This
+will not be as easy as I would like, simply because the programs I will write
+need a graphical display. Testing how something looks is very hard, so we will
+not deal with that. Instead, we will focus on testing that the user interface
+works as desired, ans leave the artistic aspects of the code to the user’s eye!</p>
+<p>The starting point for this development is the Python code I wrote back in
+2003 while working on am M.S. in Computer Science. At that time I was just
+beginning to explore Python, and the easiest graphical tool set I could find
+was <a class="reference external" href="https://docs.python.org/3/library/tkinter.html">Tkinter</a> and the <a class="reference external" href="http://pmw.sourceforge.net/">Python Mega Widgets</a> tools. these tools are starting to
+fall in favor, so ror this version, I want to use more polished tools.
+Therefore, I am going to use <a class="reference external" href="https://www.riverbankcomputing.com/software/pyqt/intro">PyQt5</a> and limit my code to the aspects I can test
+in a reasonable manner.</p>
+<div class="section" id="qtest">
+<h2>QTest<a class="headerlink" href="#qtest" title="Permalink to this headline">¶</a></h2>
+<p>The PyQt5 project offers a simple testing interface using the QTest module. We will start off development using this tool and Travis-CI to mke sure testing is done every time we push changes to project code to <a class="reference external" href="https://github.com/">Github</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="03-testing-on-travis-ci.html" class="btn btn-neutral float-right" title="Testing on Travis-CI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="CFD Experiments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Roie R. Black
+      <span class="lastupdated">
+        Last updated on Apr 08, 2020.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

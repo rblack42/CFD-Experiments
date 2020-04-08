@@ -2,15 +2,22 @@
 
 .PHONY: all
 all: ## Process all source code	
-	@cd py && make
-	@cd cpp && make
-	@cd go && make
+	@cd src && make
 
 .PHONY: init
 init:
 	python3 -m venv _venv
-	mkdir -p docs rst/_static go cpp py
+	mkdir -p docs rst/_static
 
 # .PHONY: reqs
 reqs: ## Install Python requirements
 	pip install -r requirements.txt
+
+.PHONY: test
+test:
+	cd src && make test
+
+.PHONY: html
+html:
+	cd rst && sphinx-build -d _build/doctrees . ../docs
+

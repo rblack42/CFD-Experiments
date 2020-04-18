@@ -45,7 +45,7 @@ supercomputer.
 The project uses a visual front end written in Python, a language many students
 learn in their first semesters in school. The computational engines will be
 written in modern high-performance languages. We will explore new tools for
-generating the needed code nd conduct experiments aimed at understanding how to
+generating the needed code and conduct experiments aimed at understanding how to
 solve CFD problems on modern computer systems.
 
 In all of this work, students will be able to follow along as all of the code
@@ -63,8 +63,7 @@ machines and run all experiments.
     Image created from photo found on https://twitter.com/LockheedMartin. It
     was converted into this sketch using ImageMagik using this command: 
     
-    * convert f35.jpg \( -clone 0 -negate -blur 0x12 \) -compose colordodge
-    -composite \ -modulate 90,0,90 -auto-level f35_sketch.png
+    * convert f35.jpg \( -clone 0 -negate -blur 0x12 \) -compose colordodge -composite \ -modulate 90,0,90 -auto-level f35_sketch.png
 
 ..  |travis-build| image:: https://travis-ci.org/rblack42/CFDexperiments.svg?branch=master
     :alt: Build badge from Travis-CI

@@ -7,6 +7,10 @@ CFD Experiments
 
 |travis-build| |license|
 
+..  image:: rst/_static/images/f35-sketch.png
+    :align: center
+    :width: 500
+
 This project hosts my experiments with Computational Fluid Dynamics on a
 variety of machines using several common programming languages. The experiment
 is based on code I developed in 1975 while working at the USAF Aerospace
@@ -53,6 +57,14 @@ The target reader of this material is an engineering student with at least one
 semester of programming experience, preferably in Python. All code will be
 explained in enough detail that students will be able to set up their local
 machines and run all experiments.
+
+..  note::
+
+    Image created from photo found on https://twitter.com/LockheedMartin. It
+    was converted into this sketch using ImageMagik using this command: 
+    
+    * convert f35.jpg \( -clone 0 -negate -blur 0x12 \) -compose colordodge
+    -composite \ -modulate 90,0,90 -auto-level f35_sketch.png
 
 ..  |travis-build| image:: https://travis-ci.org/rblack42/CFDexperiments.svg?branch=master
     :alt: Build badge from Travis-CI

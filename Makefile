@@ -1,4 +1,5 @@
 # Makefile for CFD Experiments Project
+PROJNAME := $(notdir $(PWD))
 
 .PHONY: all
 all: ## Process all source code	
@@ -21,3 +22,6 @@ test:
 html:
 	cd rst && sphinx-build -d _build/doctrees . ../docs
 
+.PHONY: ui
+ui:	src/$(PROJNAME).ui
+	pyuic5 --output src/UI_$(PROJNAME).py $<
